@@ -427,12 +427,10 @@ export const App: React.FC = () => {
       {/* 상단 내비게이션 및 미니 QR 코드 */}
       <header className="header">
         <div className="logo" onClick={() => setActiveTab('home')} style={{ cursor: 'pointer' }}>
-          <h1>무빙 캄보디아 <span>(moving Cambodia)</span></h1>
+          <h1> {isKorean ? "무빙 캄보디아" : "ឌីណាមិក ខេមបូឌា"}</h1>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div className="header-qr">
-            <QRCode value={siteUrl} size={42} />
-          </div>
+          
           <button className="lang-toggle-btn" onClick={toggleLanguage}>
             {isKorean ? "🇰🇭 ភាសាខ្មែរ" : "🇰🇷 한국어 번역"}
           </button>
