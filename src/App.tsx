@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import QRCode from 'react-qr-code';
 import './App.css';
 
 // assets 이미지 불러오기
@@ -58,7 +59,7 @@ const koreanStudyDatabase: KoreanStudyItem[] = [
   { id: 5, kr: "사랑", kmPron: "ซา-รัง", kmMeaning: "សេចក្តីស្រឡាញ់", enMeaning: "Love" },
   { id: 6, kr: "은혜", kmPron: "อึน-เฮ", kmMeaning: "ព្រះគុណ", enMeaning: "Grace" },
   { id: 7, kr: "축복합니다", kmPron: "ชุก-บก-ฮัม-นิ-ดา", kmMeaning: "សូមព្រះប្រទានពរ", enMeaning: "God bless you" },
-  { id: 8, kr: "기도", kmPron: "คี-โด", kmMeaning: "ការអធិស្ឋាន", enMeaning: "Prayer" },
+  { id: 8, kr: "기도", kmPron: "คี-โด", kmMeaning: "การอธิស្ឋាន", enMeaning: "Prayer" },
   { id: 9, kr: "믿음", kmPron: "มี-ดึม", kmMeaning: "ជំនឿ", enMeaning: "Faith" },
   { id: 10, kr: "소망", kmPron: "โซ-มัง", kmMeaning: "សេចក្តីសង្ឃឹម", enMeaning: "Hope" },
   { id: 11, kr: "얼마예요?", kmPron: "ออล-มา-เย-โย?", kmMeaning: "ថ្លៃប៉ុន្មាន?", enMeaning: "How much is it?" },
@@ -80,11 +81,11 @@ const koreanStudyDatabase: KoreanStudyItem[] = [
   { id: 27, kr: "주일 (일요일)", kmPron: "ชู-อิล (อิล-โย-อิล)", kmMeaning: "ថ្ងៃអាទិត្យ", enMeaning: "Sunday" },
   { id: 28, kr: "교회", kmPron: "กโย-ฮเว", kmMeaning: "ព្រះវិហារ", enMeaning: "Church" },
   { id: 29, kr: "성경", kmPron: "ซ็อง-กย็อง", kmMeaning: "ព្រះគម្ពីរ", enMeaning: "Bible" },
-  { id: 30, kr: "찬양", kmPron: "ชัน-ยัง", kmMeaning: "ការសរសើរតម្កើង", enMeaning: "Praise" },
+  { id: 30, kr: "찬양", kmPron: "ชัน-ยัง", kmMeaning: "การสរសើរตម្កើង", enMeaning: "Praise" },
   { id: 31, kr: "평안하세요", kmPron: "พย็อง-อัน-ฮา-เซ-โย", kmMeaning: "សូមឱ្យមានសន្តិភាព", enMeaning: "Peace be with you" },
   { id: 32, kr: "수고하셨습니다", kmPron: "ซู-โก-ฮา-ชยอส-ซึม-นิ-ดา", kmMeaning: "អរគុណសម្រាប់ការខិតខំប្រឹងប្រែង", enMeaning: "Good job / Thank you" },
   { id: 33, kr: "천국", kmPron: "ชอน-กุก", kmMeaning: "ស្ថានសួគ៌", enMeaning: "Heaven" },
-  { id: 34, kr: "구원", kmPron: "กู-วอน", kmMeaning: "ការសង្គ្រោះ", enMeaning: "Salvation" },
+  { id: 34, kr: "구원", kmPron: "กู-วอน", kmMeaning: "การសង្គ្រោះ", enMeaning: "Salvation" },
   { id: 35, kr: "친구", kmPron: "ชิน-กู", kmMeaning: "មិត្តភក្តិ", enMeaning: "Friend" },
   { id: 36, kr: "병원", kmPron: "พย็อง-วอน", kmMeaning: "មន្ទីរពេទ្យ", enMeaning: "Hospital" },
   { id: 37, kr: "약국", kmPron: "ยัก-กุก", kmMeaning: "ឱសថស្ថាន", enMeaning: "Pharmacy" },
@@ -97,7 +98,7 @@ const koreanStudyDatabase: KoreanStudyItem[] = [
 const gospelRoute: GospelStation[] = [
   {
     id: 1,
-    titleKm: "1. การបង្កើត (ការបង្កើត)",
+    titleKm: "1. การสร้าง (ការបង្កើត)",
     titleKr: "1. 창조",
     descKm: "ព្រះជាម្ចាស់បានបង្កើតសកលលោក មនុស្សលោក និងអ្វីៗទាំងអស់យ៉ាងល្អប្រពៃ។",
     descKr: "하나님께서 세상과 인간을 아름답게 창조하셨습니다.",
@@ -108,7 +109,7 @@ const gospelRoute: GospelStation[] = [
   },
   {
     id: 2,
-    titleKm: "2. អំពើបាប (អំពើបាប)",
+    titleKm: "2. อំពើบាប (អំពើបាប)",
     titleKr: "2. 죄",
     descKm: "មនុស្សបានបោះបង់ចោលព្រះជាម្ចាស់ ហើយធ្លាក់ចូលទៅក្នុងអំពើបាប។",
     descKr: "인간이 하나님을 떠나 죄에 빠졌습니다.",
@@ -141,7 +142,7 @@ const gospelRoute: GospelStation[] = [
   },
   {
     id: 5,
-    titleKm: "5. ការសុគតជំនួសយើង",
+    titleKm: "5. การสุគតជំនួសយើង",
     titleKr: "5. 대신 죽으심",
     descKm: "ព្រះយេស៊ូវបានទទួលរងទោសបាប និងសុគតនៅលើឈើឆ្កាងជំនួសយើង។",
     descKr: "예수님이 우리 죄를 위해 십자가에서 대신 죽으셨습니다.",
@@ -152,9 +153,9 @@ const gospelRoute: GospelStation[] = [
   },
   {
     id: 6,
-    titleKm: "6. ការសង្គ្រោះ",
+    titleKm: "6. การសង្គ្រោះ",
     titleKr: "6. 구원",
-    descKm: "យើងទទួលបានការអត់ទោសបាប និងទទួលបានជីវិតអស់កល្បជានិច្ចជាអំណោយទាន។",
+    descKm: "យើងទទួលបានการអត់ទោសបាប និងទទួលបានជីវិតអស់កល្បជានិច្ចជាអំណោយទាន។",
     descKr: "죄 사함을 받고 영원한 생명을 선물로 받습니다.",
     verseKm: "អេភេសូរ 2:8",
     verseKr: "เอเบซัส 2:8",
@@ -165,7 +166,7 @@ const gospelRoute: GospelStation[] = [
     id: 7,
     titleKm: "7. ជំនឿ",
     titleKr: "7. 믿음",
-    descKm: "យើងទទួលបានការសង្គ្រោះដោយសារការជឿ និងទទួលស្វាគមន៍ព្រះយេស៊ូវនៅក្នុងចិត្ត។",
+    descKm: "យើងទទួលបានการសង្គ្រោះដោយសារการជឿ និងទទួលស្វាគមន៍ព្រះយេស៊ូវនៅក្នុងចិត្ត។",
     descKr: "예수님을 마음으로 믿고 영접함으로 구원에 이릅니다.",
     verseKm: "រ៉ូម 10:10",
     verseKr: "โรมาสาร 10:10",
@@ -180,7 +181,7 @@ const gospelRoute: GospelStation[] = [
     descKr: "예수님이 다시 오셔서 영원한 하나님 나라를 완성하십니다.",
     verseKm: "វេរវរណៈ 22:20",
     verseKr: "โยฮันเคชิรก 22:20",
-    verseTextKm: "ព្រះអង្គដែលធ្វើបន្ទាល់អំពីការទាំងនេះ មានព្រះបន្ទូលថា៖ «មែនហើយ យើងនឹងមកយ៉ាងឆាប់!»។ អាម៉ែន! ព្រះអម្ចាស់យេស៊ូវអើយ សូមយាងមក!",
+    verseTextKm: "ព្រះអង្គដែលធ្វើបន្ទាល់អំពីการទាំងនេះ មានព្រះបន្ទូលថា៖ «មែនហើយ យើងនឹងមកយ៉ាងឆាប់!»។ អាម៉ែន! ព្រះអម្ចាស់យេស៊ូវអើយ សូមយាងមក!",
     verseTextKr: "이것들을 증언하신 이가 이르시되 내가 진실로 속히 오리라 하시거늘 아멘 주 예수여 오시옵소서"
   }
 ];
@@ -189,29 +190,29 @@ const bibleVerses: BibleVerse[] = [
   { km: "ដ្បិតព្រះជាម្ចាស់ស្រឡាញ់មនុស្សលោកខ្លាំងណាស់ រហូតដល់បានប្រទានព្រះរាជបុត្រាតែមួយគត់របស់ព្រះអង្គ", kr: "하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니", refKm: "(យូហាន 3:16)", refKr: "(요 3:16)" },
   { km: "ព្រះយេហូវ៉ាទ្រង់ជាអ្នកគង្វាលខ្ញុំ ខ្ញុំគ្មានខ្វះអ្វីឡើយ", kr: "여호와는 나의 목자시니 내게 부족함이 없으리로다", refKm: "(ទំនុកតម្កើង 23:1)", refKr: "(시 23:1)" },
   { km: "អស់អ្នកដែលនឿយហត់ និងរែកបន្ទុកធ្ងន់អើយ ចូរមកឯខ្ញុំ ខ្ញុំនឹងឱ្យអ្នករាល់គ្នាបានសម្រាក", kr: "수고하고 짐 진 자들아 다 내게로 오라 내가 너희를 쉬게 하리라", refKm: "(ម៉ាថាយ 11:28)", refKr: "(มธ 11:28)" },
-  { km: "ចូរទុកចិត្តលើព្រះយេហូវ៉ាឱ្យអស់ពីចិត្ត ហើយកុំពឹងផ្អែកលើការយល់ដឹងរបស់ខ្លួនឡើយ", kr: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라", refKm: "(សុភាសិត 3:5)", refKr: "(잠 3:5)" },
+  { km: "ចូរទុកចិត្តលើព្រះយេហូវ៉ាឱ្យអស់ពីចិត្ត ហើយកុំពឹងផ្អែកលើการយល់ដឹងរបស់ខ្លួនឡើយ", kr: "너는 마음을 다하여 여호와를 신뢰하고 네 명철을 의지하지 말라", refKm: "(សុភាសិត 3:5)", refKr: "(잠 3:5)" },
   { km: "ចូរទទួលស្គាល់ទ្រង់នៅក្នុងគ្រប់ផ្លូវរបស់អ្នក ហើយទ្រង់នឹងតម្រង់ផ្លូវរបស់អ្នក", kr: "너는 범사에 그를 인정하라 그리하면 네 길을 지도하시리라", refKm: "(សុភាសិត 3:6)", refKr: "(잠 3:6)" },
   { km: "កុំខ្លាចឡើយ ដ្បិតយើងនៅជាមួយអ្នក កុំតក់ស្លុតឡើយ ដ្បិតយើងជាព្រះរបស់អ្នក", kr: "두려워하지 말라 내가 너와 함께 함이라 놀라지 말라 나는 네 하나님이 됨이라 내가 너를 굳세게 하리라 참으로 너를 도와 주리라", refKm: "(អេសាយ 41:10)", refKr: "(사 41:10)" },
   { km: "ខ្ញុំអាចធ្វើអ្វីៗទាំងអស់បាន ដោយសារព្រះអង្គដែលប្រទានកម្លាំងដល់ខ្ញុំ", kr: "내게 능력 주시는 자 안에서 내가 모든 것을 할 수 있느니라", refKm: "(ភីលីព 4:13)", refKr: "(빌 4:13)" },
   { km: "ហើយព្រះនៃខ្ញុំ នឹងបំពេញគ្រប់សេចក្តីត្រូវការរបស់អ្នករាល់គ្នា តាមសិរីល្អដ៏ស្តុកស្តម្ភរបស់ព្រះអង្គនៅក្នុងព្រះគ្រីស្ទយេស៊ូវ", kr: "나의 하나님이 그리스도 예수 안에서 영광 가운데 그 풍성한 대로 너희 모든 쓸 것을 채우시리라", refKm: "(ភីលីព 4:19)", refKr: "(빌 4:19)" },
-  { km: "កុំខ្វល់ខ្វាយអំពីអ្វីឡើយ ប៉ុន្តែនៅក្នុងគ្រប់កិច្ចការទាំងអស់ ចូរជម្រាបសេចក្តីត្រូវការរបស់អ្នកទៅព្រះជាម្ចាស់តាមរយៈការអធិស្ឋាន", kr: "아무 것도 염려하지 말고 다만 모든 일에 기도와 간구로, 너희 구할 것을 감사함으로 하나님께 아뢰라", refKm: "(ភីលីព 4:6)", refKr: "(빌 4:6)" },
-  { km: "ហើយសន្តិសុខរបស់ព្រះជាម្ចាស់ ដែលហួសពីការយល់ដឹងទាំងឡាយ នឹងការពារចិត្ត និងគំនិតរបស់អ្នករាល់គ្នានៅក្នុងព្រះគ្រីស្ទយេស៊ូវ", kr: "그리하면 모든 지각에 뛰어난 하나님의 평강이 그리스도 예수 안에서 너희 마음과 생각을 지키시리라", refKm: "(ភីលីព 4:7)", refKr: "(빌 4:7)" }
+  { km: "កុំខ្វល់ខ្វាយអំពីអ្វីឡើយ ប៉ុន្តែនៅក្នុងគ្រប់កិច្ចการទាំងអស់ ចូរជម្រាបសេចក្តីត្រូវការរបស់អ្នកទៅព្រះជាម្ចាស់តាមរយៈการអធិស្ឋាន", kr: "아무 것도 염려하지 말고 다만 모든 일에 기도와 간구로, 너희 구할 것을 감사함으로 하나님께 아뢰라", refKm: "(ភីលីព 4:6)", refKr: "(빌 4:6)" },
+  { km: "ហើយសន្តិសុខរបស់ព្រះជាម្ចាស់ ដែលហួសពីการយល់ដឹងទាំងឡាយ នឹងការពារចិត្ត និងគំនិតរបស់អ្នករាល់គ្នានៅក្នុងព្រះគ្រីស្ទយេស៊ូវ", kr: "그리하면 모든 지각에 뛰어난 하나님의 평강이 그리스도 예수 안에서 너희 마음과 생각을 지키시리라", refKm: "(ភីលីព 4:7)", refKr: "(빌 4:7)" }
 ];
 
-// 울산 캄보디아 노동자를 위한 필수 웹사이트 10선 (캄보디아 대사관 포함)
+// 울산 캄보디아 노동자를 위한 필수 웹사이트 10선
 const usefulLinks: UsefulLink[] = [
   {
     nameKm: "ប្រព័ន្ធ HiKorea (ហៃកូរ៉េ)",
     nameKr: "하이코리아 (출입국 민원)",
-    descKm: "កក់ការណាត់ជួប កាតស្នាក់នៅ និងពន្យារប័ណ្ណទិដ្ឋាការ/ផ្លាស់ប្តូរអាសយដ្ឋាន",
+    descKm: "កក់การណាត់ជួប កាតស្នាក់នៅ និងពន្យារប័ណ្ណទិដ្ឋាการ/ផ្លាស់ប្តូរអាសយដ្ឋាន",
     descKr: "비자 연장, 주소지 변경, 출입국 방문 예약",
     url: "https://www.hikorea.go.kr",
-    category: "ទិដ្ឋាការ / Visa"
+    category: "ទិដ្ឋាการ / Visa"
   },
   {
-    nameKm: "ប្រព័ន្ធ EPS (ការងារ)",
+    nameKm: "ប្រព័ន្ធ EPS (การងារ)",
     nameKr: "EPS 외국인고용",
-    descKm: "ពិនិត្យមើលកិច្ចសន្យាការងារ សិទ្ធិ និងការផ្លាស់ប្តូរកន្លែងធ្វើការ",
+    descKm: "ពិនិត្យមើលកិច្ចសន្យาการងារ សិទ្ធិ និងการផ្លាស់ប្តូរកន្លែងធ្វើการ",
     descKr: "근로계약서, 체류기간 및 이직 내역 조회",
     url: "https://www.eps.go.kr",
     category: "ពលកម្ម / Labour"
@@ -219,7 +220,7 @@ const usefulLinks: UsefulLink[] = [
   {
     nameKm: "មជ្ឈមណ្ឌលគាំទ្រពលករបរទេសអ៊ុលសាន",
     nameKr: "울산외국인주민지원센터",
-    descKm: "ការប្រឹក្សាផ្នែកច្បាប់ដោយឥតគិតថ្លៃ និងការបកប្រែភាសាខ្មែរនៅអ៊ុលសាន",
+    descKm: "การប្រឹក្សាផ្នែកច្បាប់ដោយឥតគិតថ្លៃ និងการបកប្រែភាសាខ្មែរនៅអ៊ុលសាន",
     descKr: "울산 지역 무료 법률·노무 상담 및 한국어 교육",
     url: "http://usfr.or.kr",
     category: "អ៊ុលសាន / Ulsan"
@@ -227,7 +228,7 @@ const usefulLinks: UsefulLink[] = [
   {
     nameKm: "ស្ថានទូតកម្ពុជាប្រចាំសាធារណរដ្ឋកូរ៉េ (Seoul)",
     nameKr: "주한 캄보디아 대사관",
-    descKm: "សេវាលិខិតឆ្លងដែន (Passport) និងកិច្ចការកុងស៊ុលកម្ពុជា",
+    descKm: "សេវាលិខិតឆ្លងដែន (Passport) និងកិច្ចการកុងស៊ុលកម្ពុជា",
     descKr: "캄보디아 여권 재발급, 영사 및 행정 서비스",
     url: "https://www.cambodiaembassy.kr",
     category: "ស្ថានទូត / Embassy"
@@ -235,15 +236,15 @@ const usefulLinks: UsefulLink[] = [
   {
     nameKm: "បេឡាជាតិសន្តិសុខសង្គម/ធានារ៉ាប់រងសុខភាព (NHIS)",
     nameKr: "국민건강보험공단",
-    descKm: "ពិនិត្យមើលសិទ្ធិទទួលបានការថែទាំសុខភាព និងការបង់ប្រាក់ភាគទាន",
+    descKm: "ពិនិត្យមើលសិទ្ធិទទួលបានการថែទាំសុខភាព និងการបង់ប្រាក់ភាគទាន",
     descKr: "외국인 건강보험 자격, 보험료 및 병원 안내",
     url: "https://www.nhis.or.kr",
     category: "សុខភាព / Medical"
   },
   {
-    nameKm: "អង្គភាពសំណងគ្រោះថ្នាក់ការងារ (KCOMWEL)",
+    nameKm: "អង្គភាពសំណងគ្រោះថ្នាក់การងារ (KCOMWEL)",
     nameKr: "근로복지공단 (산재보험)",
-    descKm: "ការដាក់ពាក្យសុំសំណងនៅពេលមានជំងឺ ឬរបួសដោយសារការងារ",
+    descKm: "การដាក់ពាក្យសុំសំណងនៅពេលមានជំងឺ ឬរបួសដោយសារการងារ",
     descKr: "산업재해(산재) 신청 및 미지급 임금 대지급금",
     url: "https://www.comwel.or.kr",
     category: "សិទ្ធិ / Welfare"
@@ -251,23 +252,23 @@ const usefulLinks: UsefulLink[] = [
   {
     nameKm: "អង្គភាពអភិវឌ្ឍន៍ធនធានមនុស្សកូរ៉េ (HRD Korea)",
     nameKr: "한국산업인력공단 (EPS)",
-    descKm: "ការទាមទារប្រាក់ធានារ៉ាប់រងត្រឡប់ទៅប្រទេសវិញ និងប្រាក់បំពេញការងារ",
+    descKm: "การទាមទារប្រាក់ធានារ៉ាប់រងត្រឡប់ទៅប្រទេសវិញ និងប្រាក់បំពេញการងារ",
     descKr: "귀국비용보험, 출국만기보험 신청 및 수령 안내",
     url: "https://www.hrdkorea.or.kr",
     category: "ធានារ៉ាប់រង / Insurance"
   },
   {
-    nameKm: "គេហទំព័រសស្វែងរកការងារ Work24 (고용24)",
+    nameKm: "គេហទំព័រសស្វែងរកการងារ Work24 (고용24)",
     nameKr: "고용24 (구 워크넷)",
-    descKm: "ស្វែងរកការងារធ្វើដោយស្របច្បាប់ និងទទួលបានអត្ថប្រយោជន៍ផ្សេងៗ",
+    descKm: "ស្វែងរកการងារធ្វើដោយស្របច្បាប់ និងទទួលបានអត្ថប្រយោជន៍ផ្សេងៗ",
     descKr: "공식 구직 및 채용 정보, 고용보험 서비스",
     url: "https://www.work24.go.kr",
-    category: "ការងារ / Jobs"
+    category: "การងារ / Jobs"
   },
   {
     nameKm: "មជ្ឈមណ្ឌលចរាចរណ៍អ៊ុលសាន (រថយន្តក្រុង)",
     nameKr: "울산교통관리센터 (버스정보)",
-    descKm: "ពិនិត្យមើលម៉ោងរថយន្តក្រុងនៅអ៊ុលសានសម្រាប់ការធ្វើដំណើរទៅធ្វើការ",
+    descKm: "ពិនិត្យមើលម៉ោងរថយន្តក្រុងនៅអ៊ុលសានសម្រាប់ការធ្វើដំណើរទៅធ្វើการ",
     descKr: "울산 공단 출퇴근 버스 실시간 노선 및 시간표",
     url: "https://its.ulsan.kr",
     category: "ចរាចរណ៍ / Transport"
@@ -275,7 +276,7 @@ const usefulLinks: UsefulLink[] = [
   {
     nameKm: "ដានូរី (Danuri Portal)",
     nameKr: "다누리 포털 (생활정보)",
-    descKm: "ព័ត៌មានអំពីការរស់នៅក្នុងប្រទេសកូរ៉េ និងលេខទូរស័ព្ទជំនួយបន្ទាន់ (1345/1350)",
+    descKm: "ព័ត៌មានអំពីการរស់នៅក្នុងប្រទេសកូរ៉េ និងលេខទូរស័ព្ទជំនួយបន្ទាន់ (1345/1350)",
     descKr: "다국어 생활 정보 및 긴급 상담 전화 안내",
     url: "https://www.liveinkorea.kr",
     category: "ជីវិត / Life"
@@ -286,6 +287,8 @@ export const App: React.FC = () => {
   const [isKorean, setIsKorean] = useState<boolean>(false);
   const [todayVerse, setTodayVerse] = useState<BibleVerse | null>(null);
   const [activeTab, setActiveTab] = useState<'home' | 'electric' | 'korean'>('home');
+
+  const siteUrl = "https://movingcambodia.vercel.app/";
 
   // 전기세 분배 계산기 State
   const [totalBill, setTotalBill] = useState<number>(0);
@@ -387,14 +390,19 @@ export const App: React.FC = () => {
 
   return (
     <div className="app-container">
-      {/* 상단 내비게이션 */}
+      {/* 상단 내비게이션 및 미니 QR 코드 */}
       <header className="header">
         <div className="logo" onClick={() => setActiveTab('home')} style={{ cursor: 'pointer' }}>
           <h1>무빙 캄보디아 <span>(moving Cambodia)</span></h1>
         </div>
-        <button className="lang-toggle-btn" onClick={toggleLanguage}>
-          {isKorean ? "🇰🇭 ភាសាខ្មែរ" : "🇰🇷 한국어 번역"}
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          <div className="header-qr">
+            <QRCode value={siteUrl} size={42} />
+          </div>
+          <button className="lang-toggle-btn" onClick={toggleLanguage}>
+            {isKorean ? "🇰🇭 ភាសាខ្មែរ" : "🇰🇷 한국어 번역"}
+          </button>
+        </div>
       </header>
 
       {/* 메인 서비스 메뉴 버튼 */}
@@ -459,7 +467,7 @@ export const App: React.FC = () => {
               <p className="subway-subtitle">
                 {isKorean 
                   ? "창조부터 다시 오실 예수님까지 이어지는 8개의 노선 역입니다." 
-                  : "ស្ថានីយចំនួន ៨ ដែលភ្ជាប់ពីការបង្កើត រហូតដល់ការយាងមកវិញនៃព្រះយេស៊ូវ"}
+                  : "ស្ថានីយចំនួន ៨ ដែលភ្ជាប់ពីการបង្កើត រហូតដល់การយាងមកវិញនៃព្រះយេស៊ូវ"}
               </p>
             </div>
 
@@ -531,11 +539,11 @@ export const App: React.FC = () => {
       {activeTab === 'electric' && (
         <main className="main-content">
           <section className="page-card">
-            <h3>{isKorean ? "⚡ 방별 전기요금 계산기" : "⚡ ម៉ាស៊ីនគណនាថ្លៃអគ្គិសនีតាមបន្ទប់"}</h3>
+            <h3>{isKorean ? "⚡ 방별 전기요금 계산기" : "⚡ ម៉ាស៊ីនគណនាថ្លៃអគ្គិសនីតាមបន្ទប់"}</h3>
             <p className="page-desc">
               {isKorean 
                 ? "전체 요금과 방별 전기 사용량을 입력하면 쓴 만큼 요금을 나눠드립니다." 
-                : "បញ្ចូលថ្លៃភ្លើងសរុប និងបរិមាណនៃការប្រើប្រាស់តាមបន្ទប់ ដើម្បីគណនាថ្លៃភ្លើងតាមការប្រើប្រាស់ជាក់ស្តែង"}
+                : "បញ្ចូលថ្លៃភ្លើងសរុប និងបរិមាណនៃ'ការប្រើប្រាស់តាមបន្ទប់ ដើម្បីគណនាថ្លៃភ្លើងតាម'ការប្រើប្រាស់ជាក់ស្តែង"}
             </p>
 
             <div className="calc-container">
@@ -600,7 +608,7 @@ export const App: React.FC = () => {
 
               <div className="calc-summary">
                 <div className="summary-row">
-                  <span>{isKorean ? "총 사용량:" : "ការប្រើប្រាស់សរុប:"}</span>
+                  <span>{isKorean ? "총 사용량:" : "การប្រើប្រាស់សរុប:"}</span>
                   <strong>{totalUsage.toLocaleString()} kWh</strong>
                 </div>
                 <div className="summary-row highlight">
@@ -653,9 +661,19 @@ export const App: React.FC = () => {
         </main>
       )}
 
-      {/* 푸터 */}
+      {/* 대형 QR 코드가 포함된 푸터 */}
       <footer className="footer">
-        <p>© 2026 moving Cambodia (무빙 캄보디아) Christian Community in Ulsan. All rights reserved.</p>
+        <div className="qr-footer-card">
+          <div className="qr-image-wrapper">
+            <QRCode value={siteUrl} size={110} />
+          </div>
+          <div className="qr-info">
+            <h4>{isKorean ? "스마트폰으로 QR 코드를 스캔하세요" : "ស្កេន QR Code ជាមួយទូរស័ព្ទដៃរបស់អ្នក"}</h4>
+            <p>{siteUrl}</p>
+            <span>{isKorean ? "친구들과 사이트를 공유하세요!" : "ចែករំលែកគេហទំព័រនេះជាមួយមិត្តភក្តិរបស់អ្នក!"}</span>
+          </div>
+        </div>
+        <p className="copyright">© 2026 moving Cambodia (무빙 캄보디아) Christian Community in Ulsan. All rights reserved.</p>
       </footer>
     </div>
   );
