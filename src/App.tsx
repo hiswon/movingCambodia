@@ -683,7 +683,7 @@ export const App: React.FC = () => {
                     #{idx + 1}
                   </div>
                   <h4>{item.kr}</h4>
-                  <p className="pron-text">발음 (การอ่าน): {item.kmPron}</p>
+                  <p className="pron-text">សំឡេង: {item.kmPron}</p>
                   <p className="meaning-text">অর্থ (សេចក្តីន័យ): {item.kmMeaning}</p>
                   <span style={{ fontSize: '0.75rem', color: '#888' }}>({item.enMeaning})</span>
                 </div>
